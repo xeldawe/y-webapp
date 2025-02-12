@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Integration Developer API
+  description: API documentation for the Integration Developer application.
+  version: 3.1.0
+host: localhost:8100
+basePath: /
+schemes:
+  - http
+paths:
+  /genres:
+    get:
+      summary: Get all genres
+      responses:
+        200:
+          description: Successfully retrieved list of genres
+  /artists:
+    get:
+      summary: Get all artists
+      responses:
+        200:
+          description: Successfully retrieved list of artists
+  /albums:
+    get:
+      summary: Get albums by artist name
+      parameters:
+        - name: artistName
+          in: query
+          description: Name of the artist to filter by
+          required: false
+          type: string
+      responses:
+        200:
+          description: Successfully retrieved albums based on query parameters
+    post:
+      summary: Create a new album
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: album
+          description: Album object that needs to be added
+          required: true
+          schema:
+            type: object
+            properties:
+              AlbumName:
+                type: string
+                example: test
+              DateReleased:
+                type: string
+                format: date
+                example: 2024-01-01
+              ArtistId:
+                type: integer
+                example: 11
+              GenreId:
+                type: integer
+                example: 7
+      responses:
+        201:
+          description: Successfully created album
+  /artists-by-genre:
+    get:
+      summary: Get artists by genre name
+      parameters:
+        - name: genreName
+          in: query
+          description: Name of the genre to filter by
+          required: false
+          type: string
+      responses:
+        200:
+          description: Successfully retrieved artists based on query parameters
+
+definitions:
+  Genre:
+    type: object
+    properties:
+      GenreId:
+        type: integer
+      GenreName:
+        type: string
+  Artist:
+    type: object
+    properties:
+      ArtistId:
+        type: integer
+      ArtistName:
+        type: string
+  Album:
+    type: object
+    properties:
+      AlbumId:
+        type: integer
+      AlbumName:
+        type: string
+      DateReleased:
+        type: string
+        format: date
+      ArtistId:
+        type: integer
+      GenreId:
+        type: integer

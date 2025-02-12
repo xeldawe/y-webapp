@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "cf4143a0-e9c6-4eb5-b76e-e101d421bc0d",
+		"name": "integration-developer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32689585",
+		"_collection_link": "https://yettelhu.postman.co/workspace/Integration-Team~5d451e4a-b9ea-4f2c-b181-3cdd9aa6c716/collection/32689585-cf4143a0-e9c6-4eb5-b76e-e101d421bc0d?action=share&source=collection_link&creator=32689585"
+	},
+	"item": [
+		{
+			"name": "/genres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/genres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/artists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/artists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/albums?artistName=Pink%20Floyd",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/albums?artistName=Pink%20Floyd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"albums"
+					],
+					"query": [
+						{
+							"key": "artistName",
+							"value": "Pink%20Floyd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/artists?genreName=rock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/artists?genreName=rock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"artists"
+					],
+					"query": [
+						{
+							"key": "genreName",
+							"value": "rock"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/albums",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"AlbumName\":\"test\",\n    \"DateReleased\":\"2024-01-01\",\n    \"ArtistId\":11,\n    \"GenreId\":7}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/albums",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,17 @@
+export * from './categoryController.service';
+import { CategoryControllerService } from './categoryController.service';
+export * from './categoryEntityController.service';
+import { CategoryEntityControllerService } from './categoryEntityController.service';
+export * from './order.service';
+import { OrderService } from './order.service';
+export * from './orderEntityController.service';
+import { OrderEntityControllerService } from './orderEntityController.service';
+export * from './orderSearchController.service';
+import { OrderSearchControllerService } from './orderSearchController.service';
+export * from './petController.service';
+import { PetControllerService } from './petController.service';
+export * from './petEntityController.service';
+import { PetEntityControllerService } from './petEntityController.service';
+export * from './profileController.service';
+import { ProfileControllerService } from './profileController.service';
+export const APIS = [CategoryControllerService, CategoryEntityControllerService, OrderService, OrderEntityControllerService, OrderSearchControllerService, PetControllerService, PetEntityControllerService, ProfileControllerService];

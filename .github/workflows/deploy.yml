@@ -1,0 +1,32 @@
+name: Deploy Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Run Docker Compose
+      run: |
+        chmod +x run-app.sh
+        ./run-app.sh
+      env:
+        API_KEY: ${{ secrets.API_KEY }}

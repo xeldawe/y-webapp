@@ -1,0 +1,24 @@
+<div class="container header">
+  <button mat-mini-fab class="add" (click)="addOrderDialog('0ms', '0ms')">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="container">
+  <div *ngIf="orders$ | async as ordersList">
+    @for (o of ordersList; track $index) {
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Order - {{ o.id }} </mat-panel-title>
+          <mat-panel-description> {{ o.orderStatus }} </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Quantity: {{ o.quantity }}</p>
+        <p>Ship Date: {{ o.shipDate }}</p>
+        <p>Pet: {{ o.petId }}</p>
+        <p>Complete: {{ o.complete }}</p>
+        <mat-icon (click)="delete(o)">delete</mat-icon>
+      </mat-expansion-panel>
+    </mat-accordion>
+    }
+  </div>
+</div>
