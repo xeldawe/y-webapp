@@ -33,17 +33,17 @@ Your application should now be up and running. Here are the accessible endpoints
 ### Services and Endpoints
 
 - Angular Application: Available on port 4200.
-
+#
 - Music App via NGINX: Available on port 8100.
 - Music App Swagger UI: Available on port 8190.
-  
+#
 - Postgres Database: Accessible externally on port 7000.
 - MySQL Database: Accessible on port 3306.
 - Redis: Available on port 6379.
-  
+#
 - Java Async Servlet: Available on port 8080.
 - Java Async Servlet Swagger UI: Available at 8080/swagger-ui/index.html.
-  
+#     
 - Vert.x Store Endpoints: Available on port 8091.
 - Vert.x Pet Endpoints: Available on port 8092.
 
