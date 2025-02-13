@@ -21,10 +21,12 @@ You will be prompted to enter an API key. For example, you can use 768Bu2k1 or a
 
 ## 3. Initialize Pets
 - Run the init_pets.bat script to populate the database with dummy pet data:
+
   ```sh
   init_pets.bat
 ## 4. Fix Integration Project Database
 - Run the fix.bat script to fix the integration project database:
+
   ```sh
   fix.bat
 ## 5. Enjoy
@@ -46,5 +48,3 @@ Your application should now be up and running. Here are the accessible endpoints
 #     
 - Vert.x Store Endpoints: Available on port 8091.
 - Vert.x Pet Endpoints: Available on port 8092.
-
-Follow these steps to get your environment up and running.
