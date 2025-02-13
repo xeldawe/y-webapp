@@ -29,4 +29,3 @@ cd ..
 echo Starting Docker Compose...
 docker-compose --env-file API_KEY.env up --build
 
-pause
