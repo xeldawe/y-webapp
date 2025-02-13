@@ -2,23 +2,39 @@
   <button mat-mini-fab class="add" (click)="addOrderDialog('0ms', '0ms')">
     <mat-icon>add</mat-icon>
   </button>
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Filter Date Range</mat-label>
+    <mat-date-range-input 
+      [formGroup]="filterForm"
+      [rangePicker]="filterDatePicker">
+      <input matStartDate placeholder="Start date" formControlName="startDate">
+      <input matEndDate placeholder="End date" formControlName="endDate">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="filterDatePicker"></mat-datepicker-toggle>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-date-range-picker #filterDatePicker (closed)="checkAndApplyFilter()"></mat-date-range-picker>
+  </mat-form-field>
+  <button mat-icon-button matSuffix (click)="clearDates()">
+    <mat-icon>clear</mat-icon>
+  </button>
 </div>
+
 <div class="container">
   <div *ngIf="orders$ | async as ordersList">
-    @for (o of ordersList; track $index) {
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngFor="let o of ordersList; let index = index" [attr.id]="'order-panel-' + o.id" [expanded]="expanded === o.id">
         <mat-expansion-panel-header>
-          <mat-panel-title> Order - {{ o.id }} </mat-panel-title>
+          <mat-panel-title (mouseenter)="onPanelHover(o)"> Order - {{ o.id }} </mat-panel-title>
           <mat-panel-description> {{ o.orderStatus }} </mat-panel-description>
         </mat-expansion-panel-header>
         <p>Quantity: {{ o.quantity }}</p>
         <p>Ship Date: {{ o.shipDate }}</p>
-        <p>Pet: {{ o.petId }}</p>
+        <p>Pet: {{ o.petId }} ({{ getPetName(o.petId!) }})</p>
         <p>Complete: {{ o.complete }}</p>
         <mat-icon (click)="delete(o)">delete</mat-icon>
+        <mat-icon (click)="editOrderDialog(o, '0ms', '0ms')">edit</mat-icon>
       </mat-expansion-panel>
     </mat-accordion>
-    }
   </div>
 </div>

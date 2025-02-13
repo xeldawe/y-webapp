@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiKey: 'rsa123',
+    apiKey: 'dfsadas34534fh3',
     apiUrl: 'http://localhost'
 }

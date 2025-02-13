@@ -31,17 +31,23 @@ set categories[4]=category5
 :: Create JSON payload
 set payload=[
 for /L %%i in (1,1,%numPets%) do (
-    set /a "nameIdx=%%i %% 10"
-    set /a "tagIdx1=%%i %% 5"
-    set /a "tagIdx2=(%%i+1) %% 5"
-    set /a "categoryIdx1=%%i %% 5"
-    set /a "categoryIdx2=(%%i+1) %% 5"
+    :: Generate random indexes for names, tags, and categories
+    set /a "nameIdx=!random! %% 10"
+    set /a "tagIdx1=!random! %% 5"
+    set /a "tagIdx2=!random! %% 5"
+    set /a "categoryIdx1=!random! %% 5"
+    set /a "categoryIdx2=!random! %% 5"
     
-    :: Add a unique suffix to each name
-    set "uniqueName=!names[!nameIdx!]!%%i"
-    
-    set "json={\"name\":\"!uniqueName!\",\"photoUrls\":[\"http://example.com/photo!%%i!_1.jpg\",\"http://example.com/photo!%%i!_2.jpg\"],\"tags\":[{\"tag\":{\"name\":\"!tags[!tagIdx1!]!\"}},{\"tag\":{\"name\":\"!tags[!tagIdx2!]!\"}}],\"petStatus\":\"AVAILABLE\",\"categories\":[{\"category\":{\"name\":\"!categories[!categoryIdx1!]!\"}},{\"category\":{\"name\":\"!categories[!categoryIdx2!]!\"}}]}"
-    
+    :: Use the name from the names array
+    for %%j in (!nameIdx!) do set "petName=!names[%%j]!"
+    for %%j in (!tagIdx1!) do set "tagName1=!tags[%%j]!"
+    for %%j in (!tagIdx2!) do set "tagName2=!tags[%%j]!"
+    for %%j in (!categoryIdx1!) do set "categoryName1=!categories[%%j]!"
+    for %%j in (!categoryIdx2!) do set "categoryName2=!categories[%%j]!"
+
+    :: Construct JSON for this pet
+    set "json={\"name\":\"!petName!\",\"photoUrls\":[\"http://example.com/photo!%%i!_1.jpg\",\"http://example.com/photo!%%i!_2.jpg\"],\"tags\":[{\"name\":\"!tagName1!\"},{\"name\":\"!tagName2!\"}],\"petStatus\":\"AVAILABLE\",\"categories\":[{\"name\":\"!categoryName1!\"},{\"name\":\"!categoryName2!\"}]}"
+
     if %%i neq %numPets% (
         set payload=!payload!!json!,
     ) else (
@@ -54,7 +60,7 @@ set payload=!payload!]
 set payload=!payload!]
 
 :: Call the API
-curl -X POST "http://34.79.119.8:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
+curl -X POST "http://localhost:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
 
 endlocal
 cmd /k

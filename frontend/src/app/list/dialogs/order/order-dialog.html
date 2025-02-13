@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add New Order</h1>
+<h1 mat-dialog-title>{{ isUpdate ? 'Update Order' : 'Add New Order' }}</h1>
 <mat-dialog-content class="content">
   <mat-stepper linear>
     <mat-step [stepControl]="firstFormGroup">
@@ -11,9 +11,7 @@
             placeholder="Select Pet ID"
             required
           >
-            @for(pet of pets; track $index){
-            <mat-option [value]="pet.id">{{ pet.name }}</mat-option>
-            }
+            <mat-option *ngFor="let pet of pets" [value]="pet.id">{{ pet.name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <div>
@@ -31,9 +29,7 @@
             placeholder="YYYY-MM-DD"
             formControlName="secondCtrl"
           />
-          @if(secondFormGroup.get('quantityCtrl')?.hasError('required')){
-          <mat-error> Ship date is required. </mat-error>
-          }
+          <mat-error *ngIf="secondFormGroup.get('secondCtrl')?.hasError('required')">Ship date is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -44,10 +40,23 @@
             formControlName="quantityCtrl"
             type="number"
           />
-          @if(secondFormGroup.get('quantityCtrl')?.hasError('min')){
-          <mat-error> Quantity must be at least 1. </mat-error>
-          }
+          <mat-error *ngIf="secondFormGroup.get('quantityCtrl')?.hasError('min')">Quantity must be at least 1.</mat-error>
         </mat-form-field>
+
+        <mat-form-field *ngIf="isUpdate">
+          <mat-label>Order Status</mat-label>
+          <mat-select
+            formControlName="orderStatusCtrl"
+            placeholder="Select Order Status"
+          >
+            <mat-option value="PLACED">PLACED</mat-option>
+            <mat-option value="APPROVED">APPROVED</mat-option>
+            <mat-option value="DELIVERED">DELIVERED</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox *ngIf="isUpdate" formControlName="completeCtrl">Complete</mat-checkbox>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -59,7 +68,7 @@
       <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="onSubmit()">Submit</button>
+        <button mat-button (click)="onSubmit()">{{ isUpdate ? 'Update' : 'Submit' }}</button>
       </div>
     </mat-step>
   </mat-stepper>
