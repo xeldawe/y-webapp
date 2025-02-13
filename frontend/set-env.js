@@ -1,8 +1,9 @@
 const fs = require('fs');
 const targetPath = './src/environments/environment.prod.ts';
+const apiKey = process.env.API_KEY || 'rsa123';  // Fallback to 'rsa123' if API_KEY is not set
 const envConfigFile = `export const environment = {
   production: true,
-  apiKey: '${process.env.API_KEY}',
+  apiKey: '${apiKey}',
   apiUrl: 'http://34.79.119.8'
 };`;
 
@@ -12,4 +13,3 @@ fs.writeFile(targetPath, envConfigFile, function (err) {
   }
   console.log(`Output generated at ${targetPath}`);
 });
-

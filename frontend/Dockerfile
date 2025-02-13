@@ -16,6 +16,10 @@ RUN npm install -g @angular/cli && chmod +x /usr/local/bin/ng
 # Copy the rest of the application source code
 COPY . .
 
+# Set the environment variable during the build
+ARG API_KEY
+ENV API_KEY=${API_KEY}
+
 # Run the set-env.js script
 RUN node set-env.js
 
