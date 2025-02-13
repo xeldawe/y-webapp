@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { OrderState } from '../../../ngrx-order/order.reducer';
 import { addOrder } from '../../../ngrx-order/order.actions';
 import { Order } from '../../../api-client/model/order';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'add-order-dialog',
@@ -79,7 +80,7 @@ export class OrderDialog implements OnInit{
   }
 
   ninjaPetSelect() {
-    this.httpClient.get<any[]>("http://localhost:8092/pets").subscribe(
+    this.httpClient.get<any[]>(environment.apiKey+":8092/pets").subscribe(
       (data:any) => { // Explicitly type data
         this.pets = data;
         console.log(data);

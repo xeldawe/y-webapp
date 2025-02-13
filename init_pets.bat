@@ -37,7 +37,10 @@ for /L %%i in (1,1,%numPets%) do (
     set /a "categoryIdx1=%%i %% 5"
     set /a "categoryIdx2=(%%i+1) %% 5"
     
-    set "json={\"name\":\"!names[!nameIdx!]!\",\"photoUrls\":[\"http://example.com/photo!%%i!_1.jpg\",\"http://example.com/photo!%%i!_2.jpg\"],\"tags\":[{\"tag\":{\"name\":\"!tags[!tagIdx1!]!\"}},{\"tag\":{\"name\":\"!tags[!tagIdx2!]!\"}}],\"petStatus\":\"AVAILABLE\",\"categories\":[{\"category\":{\"name\":\"!categories[!categoryIdx1!]!\"}},{\"category\":{\"name\":\"!categories[!categoryIdx2!]!\"}}]}"
+    :: Add a unique suffix to each name
+    set "uniqueName=!names[!nameIdx!]!%%i"
+    
+    set "json={\"name\":\"!uniqueName!\",\"photoUrls\":[\"http://example.com/photo!%%i!_1.jpg\",\"http://example.com/photo!%%i!_2.jpg\"],\"tags\":[{\"tag\":{\"name\":\"!tags[!tagIdx1!]!\"}},{\"tag\":{\"name\":\"!tags[!tagIdx2!]!\"}}],\"petStatus\":\"AVAILABLE\",\"categories\":[{\"category\":{\"name\":\"!categories[!categoryIdx1!]!\"}},{\"category\":{\"name\":\"!categories[!categoryIdx2!]!\"}}]}"
     
     if %%i neq %numPets% (
         set payload=!payload!!json!,
@@ -51,7 +54,7 @@ set payload=!payload!]
 set payload=!payload!]
 
 :: Call the API
-curl -X POST "http://localhost:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
+curl -X POST "http://34.79.119.8:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
 
 endlocal
 cmd /k
