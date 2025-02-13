@@ -14,4 +14,5 @@ docker load -i /docker/webapp_frontend.tar
 docker load -i /docker/webapp_nginx.tar
 
 # Run Docker Compose
-docker-compose up 
+docker-compose up
+
