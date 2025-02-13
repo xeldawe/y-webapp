@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install the dependencies
 RUN npm install --legacy-peer-deps
 
+# Install Angular CLI globally and set permissions
+RUN npm install -g @angular/cli && chmod +x /usr/local/bin/ng
+
 # Copy the rest of the application source code
 COPY . .
 
