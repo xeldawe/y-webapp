@@ -43,4 +43,4 @@ Your application should now be up and running. Here are the accessible endpoints
 - Redis: Available on port 6379.
 - Java Async Servlet Swagger UI: Available at 8080/swagger-ui/index.html.
 
-Follow these steps to get your environment up and running. If you encounter any issues or need further assistance, feel free to ask!
+Follow these steps to get your environment up and running.
