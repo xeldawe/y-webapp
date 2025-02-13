@@ -33,6 +33,7 @@ Your application should now be up and running. Here are the accessible endpoints
 
 - Angular Application: Available on port 4200.
 #
+- Music App (native): Available on port 8180.
 - Music App via NGINX: Available on port 8100.
 - Music App Swagger UI: Available on port 8190.
 #
