@@ -80,7 +80,7 @@ export class OrderDialog implements OnInit{
   }
 
   ninjaPetSelect() {
-    this.httpClient.get<any[]>(environment.apiKey+":8092/pets").subscribe(
+    this.httpClient.get<any[]>(environment.apiUrl+":8092/pets").subscribe(
       (data:any) => { // Explicitly type data
         this.pets = data;
         console.log(data);
