@@ -1,5 +1,5 @@
 export const environment = {   
     production: false,   
-    apiKey: '',
+    apiKey: 'rsa123',
     apiUrl: ''  
 }   
