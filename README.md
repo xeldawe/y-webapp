@@ -14,19 +14,16 @@ If you need to update, follow the instructions on the official Docker documentat
 - Open a terminal or command prompt.
 - Navigate to the directory containing your project.
 - Run the run-app.bat script:
-
   ```sh
     run-app.bat
 You will be prompted to enter an API key. For example, you can use 768Bu2k1 or any other key. This will create and start the Docker Compose setup.
 
 ## 3. Initialize Pets
 - Run the init_pets.bat script to populate the database with dummy pet data:
-
   ```sh
   init_pets.bat
 ## 4. Fix Integration Project Database
 - Run the fix.bat script to fix the integration project database:
-
   ```sh
   fix.bat
 ## 5. Enjoy
