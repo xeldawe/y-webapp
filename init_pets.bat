@@ -1,6 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: Load the URL and port from the global.env file
+for /f "tokens=1,2 delims==" %%i in (global.env) do (
+    if "%%i"=="API_URL" set "API_URL=%%j"
+)
+
 :: Number of pets to insert
 set numPets=10
 
@@ -60,7 +65,7 @@ set payload=!payload!]
 set payload=!payload!]
 
 :: Call the API
-curl -X POST "http://localhost:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
+curl -X POST "%API_URL%:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
 
 endlocal
 cmd /k

@@ -5,27 +5,45 @@
 
   <mat-form-field class="example-form-field">
     <mat-label>Filter Date Range</mat-label>
-    <mat-date-range-input 
+    <mat-date-range-input
       [formGroup]="filterForm"
-      [rangePicker]="filterDatePicker">
-      <input matStartDate placeholder="Start date" formControlName="startDate">
-      <input matEndDate placeholder="End date" formControlName="endDate">
+      [rangePicker]="filterDatePicker"
+    >
+      <input
+        matStartDate
+        placeholder="Start date"
+        formControlName="startDate"
+      />
+      <input matEndDate placeholder="End date" formControlName="endDate" />
     </mat-date-range-input>
-    <mat-datepicker-toggle matIconSuffix [for]="filterDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="filterDatePicker"
+    ></mat-datepicker-toggle>
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-date-range-picker #filterDatePicker (closed)="checkAndApplyFilter()"></mat-date-range-picker>
+    <mat-date-range-picker
+      #filterDatePicker
+      (closed)="checkAndApplyFilter()"
+    ></mat-date-range-picker>
   </mat-form-field>
   <button mat-icon-button matSuffix (click)="clearDates()">
     <mat-icon>clear</mat-icon>
   </button>
 </div>
 
+
 <div class="container">
   <div *ngIf="orders$ | async as ordersList">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let o of ordersList; let index = index" [attr.id]="'order-panel-' + o.id" [expanded]="expanded === o.id">
+      <mat-expansion-panel
+        *ngFor="let o of ordersList; let index = index"
+        [attr.id]="'order-panel-' + o.id"
+        [expanded]="expanded === o.id"
+      >
         <mat-expansion-panel-header>
-          <mat-panel-title (mouseenter)="onPanelHover(o)"> Order - {{ o.id }} </mat-panel-title>
+          <mat-panel-title (mouseenter)="onPanelHover(o)">
+            Order - {{ o.id }}
+          </mat-panel-title>
           <mat-panel-description> {{ o.orderStatus }} </mat-panel-description>
         </mat-expansion-panel-header>
         <p>Quantity: {{ o.quantity }}</p>

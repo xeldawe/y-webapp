@@ -8,10 +8,9 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +40,10 @@ public class OrderService {
     @Lazy
 	@Autowired
 	private RedisUtil redisUtil;
+    
+	@Value("${FILTER_INTERVAL:1m}")
+	private String filterInterval;
+	
 
     public CompletableFuture<Order> createOrder(Order order) {
         return CompletableFuture.completedFuture(orderRepository.save(order));
@@ -167,4 +170,24 @@ public class OrderService {
 		target.setModifyDate(ZonedDateTime.now(ZoneId.of("UTC")));
 		target.setComplete(source.getComplete());
 	}
+	
+	public long parseInterval() {
+        char unit = filterInterval.charAt(filterInterval.length() - 1);
+        long value = Long.parseLong(filterInterval.substring(0, filterInterval.length() - 1));
+        switch (unit) {
+            case 'm': return value * 30; // Months
+            case 'd': return value; // Days
+            default: throw new IllegalArgumentException("Invalid interval unit");
+        }
+    }
+
+	public ZonedDateTime parseZonedDateTime(String dateTime) {
+        return ZonedDateTime.parse(dateTime);
+    }
+
+	public boolean isWithinDateRange(Order order, ZonedDateTime from, ZonedDateTime to) {
+        ZonedDateTime orderDate = order.getShipDate();
+        return (from == null || !orderDate.isBefore(from)) &&
+               (to == null || !orderDate.isAfter(to));
+    }
 }

@@ -19,6 +19,10 @@ COPY . .
 # Set the environment variable during the build
 ARG API_KEY
 ENV API_KEY=${API_KEY}
+ARG FILTER_INTERVAL
+ENV FILTER_INTERVAL=${FILTER_INTERVAL}
+ARG API_URL
+ENV API_URL=${API_URL}
 
 # Run the set-env.js script
 RUN node set-env.js
@@ -40,6 +44,8 @@ RUN npm install pm2 -g
 
 # Set the environment variable for the runtime
 ENV API_KEY=${API_KEY}
+ENV FILTER_INTERVAL=${FILTER_INTERVAL}
+ENV API_URL=${API_URL}
 
 # Expose port 4000 (or your chosen port)
 EXPOSE 4000

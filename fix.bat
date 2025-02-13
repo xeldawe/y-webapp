@@ -5,7 +5,7 @@ set MYSQL_USER=test
 set MYSQL_PASSWORD=testpw
 
 REM SQL file content with all the commands
-set SQL_COMMANDS_FILE=C:\Users\Xel\Desktop\Project\webapp\integration-developer-master\db\init.sql
+set SQL_COMMANDS_FILE=integration-developer-master\db\init.sql
 
 REM Drop the existing music database
 echo Dropping the existing music database...

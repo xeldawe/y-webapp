@@ -1,5 +1,6 @@
 package hu.davidder.webapp.controllers;
 
+import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -14,7 +15,6 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -64,22 +64,31 @@ public class OrderController {
 			return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.CREATED).body(savedOrder));
 	}
 
-	@GetMapping("/orders")
-	@Operation(summary = "Get list of orders", security = { @SecurityRequirement(name = "x-api-key") }, parameters = {
-			@Parameter(in = ParameterIn.QUERY, name = "from", description = "From date-time in ISO format", schema = @Schema(type = "string")),
-			@Parameter(in = ParameterIn.QUERY, name = "to", description = "To date-time in ISO format", schema = @Schema(type = "string")) }, responses = {
-					@ApiResponse(responseCode = "200", description = "List of orders", content = @Content(schema = @Schema(implementation = Order.class))),
-					@ApiResponse(responseCode = "400", description = "Invalid date-time format", content = @Content(schema = @Schema(implementation = Void.class))) })
-	public ResponseEntity<List<Order>> getOrders(@RequestParam(name = "from", required = false) String from,
-			@RequestParam(name = "to", required = false) String to, @RequestBody(required = false) OrderFilter filter) {
-		ZonedDateTime fromDateTime = (from != null) ? parseZonedDateTime(from)
-				: (filter != null ? filter.getFrom() : null);
-		ZonedDateTime toDateTime = (to != null) ? parseZonedDateTime(to) : (filter != null ? filter.getTo() : null);
-		Iterable<Order> ordersIterable = orderService.getAllOrders();
-		List<Order> orders = StreamSupport.stream(ordersIterable.spliterator(), false)
-				.filter(order -> isWithinDateRange(order, fromDateTime, toDateTime)).collect(Collectors.toList());
-		return ResponseEntity.ok(orders);
-	}
+
+    @GetMapping("/orders")
+    @Operation(summary = "Get list of orders", security = { @SecurityRequirement(name = "x-api-key") }, parameters = {
+            @Parameter(in = ParameterIn.QUERY, name = "from", description = "From date-time in ISO format", schema = @Schema(type = "string")),
+            @Parameter(in = ParameterIn.QUERY, name = "to", description = "To date-time in ISO format", schema = @Schema(type = "string")) }, responses = {
+                    @ApiResponse(responseCode = "200", description = "List of orders", content = @Content(schema = @Schema(implementation = Order.class))),
+                    @ApiResponse(responseCode = "400", description = "Invalid date-time format", content = @Content(schema = @Schema(implementation = Void.class))) })
+    public ResponseEntity<List<Order>> getOrders(@RequestParam(name = "from", required = false) String from,
+            @RequestParam(name = "to", required = false) String to, @RequestBody(required = false) OrderFilter filter) {
+        ZonedDateTime fromDateTime = (from != null) ? parseZonedDateTime(from)
+                : (filter != null ? filter.getFrom() : null);
+        ZonedDateTime toDateTime = (to != null) ? parseZonedDateTime(to) : (filter != null ? filter.getTo() : null);
+
+        if (fromDateTime != null && toDateTime != null) {
+            long intervalMonths = orderService.parseInterval();
+            if (Duration.between(fromDateTime, toDateTime).toDays() > intervalMonths * 30) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+
+        Iterable<Order> ordersIterable = orderService.getAllOrders();
+        List<Order> orders = StreamSupport.stream(ordersIterable.spliterator(), false)
+                .filter(order -> isWithinDateRange(order, fromDateTime, toDateTime)).collect(Collectors.toList());
+        return ResponseEntity.ok(orders);
+    }
 
 	private boolean isWithinDateRange(Order order, ZonedDateTime from, ZonedDateTime to) {
 		if (from != null && order.getShipDate().isBefore(from)) {

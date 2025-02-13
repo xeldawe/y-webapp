@@ -48,7 +48,10 @@ export class ListComponent implements OnInit {
   filterForm: FormGroup;
   private hoverTimers: { [key: number]: any } = {};
   private hoverActive: { [key: number]: boolean } = {};
-  expanded:number=0;
+  expanded: number = 0;
+  private maxFilterIntervalDays = this.parseIntervalToDays(
+    environment.filterInterval
+  );
 
   constructor(
     private store: Store<{ orders: OrderState }>,
@@ -66,7 +69,6 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadOrders({ from: undefined, to: undefined }));
     this.loadPets();
-
   }
 
   loadPets(): void {
@@ -119,28 +121,34 @@ export class ListComponent implements OnInit {
   onPanelHover(order: Order): void {
     const panelElement = document.getElementById(`order-panel-${order.id}`);
     if (panelElement) {
-      panelElement.addEventListener('mouseenter', () => this.startHoverTimer(order));
-      panelElement.addEventListener('mouseleave', () => this.clearHoverTimer(order));
+      panelElement.addEventListener('mouseenter', () =>
+        this.startHoverTimer(order)
+      );
+      panelElement.addEventListener('mouseleave', () =>
+        this.clearHoverTimer(order)
+      );
     }
   }
 
   startHoverTimer(order: Order): void {
-    if(order.id){
+    if (order.id) {
       if (this.hoverActive[order.id]) return;
       this.hoverActive[order.id] = true;
 
       this.hoverTimers[order.id] = setTimeout(() => {
-        this.httpClient.get<Order>(`${environment.apiUrl}:8091/store/orders/${order.id}`).subscribe(
-          (updatedOrder) => {
-            this.expanded = order.id!;
-            this.store.dispatch(triggerUpdateOrder({ order: updatedOrder }));
-            return;
-          },
-          error => {
-            console.error('Error fetching order', error);
-            return;
-          }
-        );
+        this.httpClient
+          .get<Order>(`${environment.apiUrl}:8091/store/orders/${order.id}`)
+          .subscribe(
+            (updatedOrder) => {
+              this.expanded = order.id!;
+              this.store.dispatch(triggerUpdateOrder({ order: updatedOrder }));
+              return;
+            },
+            (error) => {
+              console.error('Error fetching order', error);
+              return;
+            }
+          );
       }, 3000);
     }
   }
@@ -164,18 +172,27 @@ export class ListComponent implements OnInit {
       const to = new Date(endDate);
       to.setHours(23, 59, 59, 999); // Set time to the end of the day
 
-      const fromISOString = from.toISOString().slice(0, -5) + 'Z';
-      const toISOString = to.toISOString().slice(0, -5) + 'Z';
+      if (this.isDateRangeValid(from, to)) {
+        const fromISOString = from.toISOString().slice(0, -5) + 'Z';
+        const toISOString = to.toISOString().slice(0, -5) + 'Z';
 
-      this.store.dispatch(loadOrders({ from: fromISOString, to: toISOString }));
+        this.store.dispatch(
+          loadOrders({ from: fromISOString, to: toISOString })
+        );
+      }
     }
   }
 
   checkAndApplyFilter(): void {
     const { startDate, endDate } = this.filterForm.value;
     if (startDate && endDate) {
-      this.applyFilter();
-    } 
+      if (this.isDateRangeValid(new Date(startDate), new Date(endDate))) {
+        this.applyFilter();
+        this.updateMaxDate();
+      } else {
+        this.clearDates();
+      }
+    }
   }
 
   clearDates(): void {
@@ -184,5 +201,50 @@ export class ListComponent implements OnInit {
       endDate: null,
     });
     this.store.dispatch(loadOrders({ from: undefined, to: undefined }));
+  }
+
+  private parseIntervalToDays(interval: string): number {
+    const unit = interval.charAt(interval.length - 1);
+    const value = parseInt(interval.substring(0, interval.length - 1), 10);
+    switch (unit) {
+      case 'm':
+        return value * 30;
+      case 'd':
+        return value;
+      default:
+        throw new Error('Invalid interval unit');
+    }
+  }
+
+  private isDateRangeValid(from: Date, to: Date): boolean {
+    const fromDate = new Date(
+      from.getFullYear(),
+      from.getMonth(),
+      from.getDate()
+    );
+    const toDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+    const differenceInDays =
+      (toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24);
+    return differenceInDays <= this.maxFilterIntervalDays;
+  }
+
+  updateMaxDate(): void {
+    const { startDate, endDate } = this.filterForm.value;
+    if (startDate && endDate) {
+      const from = new Date(startDate);
+      const to = new Date(endDate);
+      if (this.isDateRangeValid(from, to)) {
+        return;
+      } else {
+        this.clearDates();
+      }
+    }
+    if (startDate) {
+      const maxDate = new Date(startDate);
+      maxDate.setDate(maxDate.getDate() + this.maxFilterIntervalDays);
+      this.filterForm.patchValue({
+        endDate: maxDate,
+      });
+    }
   }
 }

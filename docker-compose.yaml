@@ -30,16 +30,30 @@ services:
       - 'SPRING_DATA_REDIS_HOST=redis'
       - 'SPRING_DATA_REDIS_PORT=6379'
       - 'API_KEY=${API_KEY}'
+      - 'FILTER_INTERVAL=${FILTER_INTERVAL}'
+    env_file:
+      - ./global.env
+      - ./API_KEY.env
 
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - API_KEY=${API_KEY}
+        - FILTER_INTERVAL=${FILTER_INTERVAL}
+        - API_URL=${API_URL}
     environment:
       - 'API_KEY=${API_KEY}'
+      - 'FILTER_INTERVAL=${FILTER_INTERVAL}'
+      - 'API_URL=${API_URL}'
     depends_on:
       - backend
     ports:
       - 4200:4000
+    env_file:
+      - ./global.env
+      - ./API_KEY.env
 
   music-app:
     build:
