@@ -3,7 +3,7 @@ import { Order } from '../api-client';
 
 export const loadOrders = createAction(
   '[Order] Load Orders',
-  props<{ from?: string, to?: string }>()
+  props<{ from?: string; to?: string }>()
 );
 
 export const loadOrdersSuccess = createAction(

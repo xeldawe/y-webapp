@@ -32,41 +32,41 @@ export const orderReducer = createReducer(
   on(loadOrders, (state, { from, to }) => ({
     ...state,
     from,
-    to
+    to,
   })),
   on(loadOrdersSuccess, (state, { orders }) => ({
     ...state,
-    orders
+    orders,
   })),
   on(loadOrdersFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
 
   on(deleteOrderSuccess, (state, { id }) => ({
     ...state,
-    orders: state.orders.filter(order => order.id !== id),
+    orders: state.orders.filter((order) => order.id !== id),
   })),
   on(deleteOrderFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
 
   on(addOrderSuccess, (state, { order }) => ({
     ...state,
-    orders: [...state.orders, order]
+    orders: [...state.orders, order],
   })),
   on(addOrderFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
 
   on(updateOrderSuccess, (state, { order }) => ({
     ...state,
-    orders: state.orders.map(o => o.id === order.id ? order : o),
+    orders: state.orders.map((o) => (o.id === order.id ? order : o)),
   })),
   on(updateOrderFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   }))
 );

@@ -1,6 +1,16 @@
 import { Component, inject, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import {
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -14,7 +24,10 @@ import moment from 'moment';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { OrderState } from '../../../ngrx-order/order.reducer';
-import { addOrder, triggerUpdateOrder } from '../../../ngrx-order/order.actions';
+import {
+  addOrder,
+  triggerUpdateOrder,
+} from '../../../ngrx-order/order.actions';
 import { Order } from '../../../api-client/model/order';
 import { environment } from '../../../../environments/environment';
 
@@ -33,8 +46,8 @@ import { environment } from '../../../../environments/environment';
     MatSelectModule,
     MatCheckboxModule,
     MatDialogActions,
-    MatDialogContent
-],
+    MatDialogContent,
+  ],
 })
 export class OrderDialog implements OnInit {
   readonly dialogRef = inject(MatDialogRef<OrderDialog>);
@@ -56,17 +69,21 @@ export class OrderDialog implements OnInit {
   isUpdate: boolean = false;
   orderToUpdate: Order | null = null;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private httpClient: HttpClient, private ordersService: OrderService) {
-    this.orders$ = this.store.select(state => state.orders.orders);
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private httpClient: HttpClient,
+    private ordersService: OrderService
+  ) {
+    this.orders$ = this.store.select((state) => state.orders.orders);
     if (data && data.order) {
       this.isUpdate = true;
       this.orderToUpdate = data.order;
       this.firstFormGroup.patchValue({ firstCtrl: data.order.petId });
-      this.secondFormGroup.patchValue({ 
-        secondCtrl: data.order.shipDate, 
+      this.secondFormGroup.patchValue({
+        secondCtrl: data.order.shipDate,
         quantityCtrl: data.order.quantity,
         orderStatusCtrl: data.order.orderStatus,
-        completeCtrl: data.order.complete
+        completeCtrl: data.order.complete,
       });
     }
   }
@@ -83,14 +100,20 @@ export class OrderDialog implements OnInit {
     if (this.secondFormGroup.invalid) {
       return;
     }
-    const formattedDate = moment(this.secondFormGroup.value.secondCtrl).utc().format();
+    const formattedDate = moment(this.secondFormGroup.value.secondCtrl)
+      .utc()
+      .format();
     const order: Order = {
       id: this.isUpdate ? this.orderToUpdate!.id : undefined,
       petId: this.firstFormGroup.value.firstCtrl!,
       quantity: this.secondFormGroup.value.quantityCtrl!,
       shipDate: formattedDate,
-      orderStatus: this.isUpdate ? this.secondFormGroup.value.orderStatusCtrl as Order.OrderStatusEnum : 'PLACED',
-      complete: this.isUpdate ? this.secondFormGroup.value.completeCtrl! : false
+      orderStatus: this.isUpdate
+        ? (this.secondFormGroup.value.orderStatusCtrl as Order.OrderStatusEnum)
+        : 'PLACED',
+      complete: this.isUpdate
+        ? this.secondFormGroup.value.completeCtrl!
+        : false,
     };
 
     if (this.isUpdate) {
@@ -102,12 +125,12 @@ export class OrderDialog implements OnInit {
   }
 
   ninjaPetSelect() {
-    this.httpClient.get<any[]>(environment.apiUrl + ":8092/pets").subscribe(
+    this.httpClient.get<any[]>(environment.apiUrl + ':8092/pets').subscribe(
       (data: any) => {
         this.pets = data;
         console.log(data);
       },
-      error => {
+      (error) => {
         console.error('Error fetching pets', error);
       }
     );

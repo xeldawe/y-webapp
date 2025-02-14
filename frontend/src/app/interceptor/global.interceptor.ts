@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AppComponent } from '../app.component';
 
 export function getHeaders(contentType: string = 'application/json'): HttpHeaders {
   return new HttpHeaders()
@@ -20,7 +21,7 @@ export function getHeaders(contentType: string = 'application/json'): HttpHeader
     )
     .set('Content-Type', contentType)
     .set('Accept', 'application/json')
-    .set('x-api-key', environment.apiKey);
+    .set('x-api-key', AppComponent.apiKey?AppComponent.apiKey:environment.apiKey);
 }
 
 export function globalInterceptor(

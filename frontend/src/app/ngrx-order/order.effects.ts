@@ -33,7 +33,7 @@ export class OrderEffects {
       ofType(loadOrders),
       mergeMap((action) => {
         let url = `${this.apiUrl}/store/orders`;
-        console.log("From: " + action.from)
+        console.log('From: ' + action.from);
         if (action.from && action.to) {
           return this.orderService.getOrders(action.from, action.to).pipe(
             map((orders: any) => loadOrdersSuccess({ orders })),
@@ -81,7 +81,7 @@ export class OrderEffects {
           return of(updateOrderFailure({ error: 'Order ID is missing' }));
         }
         return this.store.select(selectOrderById(action.order.id)).pipe(
-          take(1), 
+          take(1),
           mergeMap((currentOrder) => {
             if (!currentOrder) {
               return of(
@@ -103,7 +103,6 @@ export class OrderEffects {
       })
     )
   );
-  
 
   constructor(
     private actions$: Actions,

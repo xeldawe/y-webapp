@@ -8,7 +8,7 @@ export const selectOrders = createSelector(
   (state: OrderState) => state.orders
 );
 
-export const selectOrderById = (orderId: number) => createSelector(
-  selectOrderState,
-  (state: OrderState) => state.orders.find(order => order.id === orderId)
-);
+export const selectOrderById = (orderId: number) =>
+  createSelector(selectOrderState, (state: OrderState) =>
+    state.orders.find((order) => order.id === orderId)
+  );

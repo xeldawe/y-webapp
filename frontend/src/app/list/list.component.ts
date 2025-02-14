@@ -1,5 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, ViewChild, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +27,8 @@ import { OrderState } from '../ngrx-order/order.reducer';
 import { OrderDialog } from './dialogs/order/order-dialog';
 import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-list',
@@ -36,11 +43,15 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatExpansionModule,
     MatNativeDateModule,
     CommonModule,
+    FormsModule,
+    MatTooltipModule,
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  @ViewChild('tooltip') tooltip!: MatTooltip;
+  tooltipMessage: string = '';
   readonly panelOpenState = signal(false);
   orders$: Observable<Order[]>;
   petsMap: { [key: number]: string } = {};
@@ -49,6 +60,7 @@ export class ListComponent implements OnInit {
   private hoverTimers: { [key: number]: any } = {};
   private hoverActive: { [key: number]: boolean } = {};
   expanded: number = 0;
+  apiKey = '';
   private maxFilterIntervalDays = this.parseIntervalToDays(
     environment.filterInterval
   );
@@ -69,6 +81,12 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadOrders({ from: undefined, to: undefined }));
     this.loadPets();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.tooltipMessage != '') {
+      this.showTooltip(this.tooltipMessage);
+    }
   }
 
   loadPets(): void {
@@ -142,6 +160,7 @@ export class ListComponent implements OnInit {
             (updatedOrder) => {
               this.expanded = order.id!;
               this.store.dispatch(triggerUpdateOrder({ order: updatedOrder }));
+              this.showTooltip(updatedOrder.shipDate!);
               return;
             },
             (error) => {
@@ -149,7 +168,7 @@ export class ListComponent implements OnInit {
               return;
             }
           );
-      }, 3000);
+      }, 500);
     }
   }
 
@@ -160,6 +179,10 @@ export class ListComponent implements OnInit {
         delete this.hoverTimers[order.id];
       }
       this.hoverActive[order.id] = false;
+      if (this.tooltipMessage) {
+        this.tooltip.hide();
+        this.tooltipMessage = '';
+      }
     }
   }
 
@@ -167,10 +190,10 @@ export class ListComponent implements OnInit {
     const { startDate, endDate } = this.filterForm.value;
     if (startDate && endDate) {
       const from = new Date(startDate);
-      from.setHours(0, 0, 0, 0); // Set time to the start of the day
+      from.setHours(0, 0, 0, 0);
 
       const to = new Date(endDate);
-      to.setHours(23, 59, 59, 999); // Set time to the end of the day
+      to.setHours(23, 59, 59, 999);
 
       if (this.isDateRangeValid(from, to)) {
         const fromISOString = from.toISOString().slice(0, -5) + 'Z';
@@ -245,6 +268,25 @@ export class ListComponent implements OnInit {
       this.filterForm.patchValue({
         endDate: maxDate,
       });
+    }
+  }
+
+  overrideApiKey(value: string) {
+    const val = value.trim();
+    if (val === '') {
+      AppComponent.apiKey = undefined;
+    } else {
+      AppComponent.apiKey = val;
+    }
+  }
+
+  showTooltip(message: string): void {
+    this.tooltipMessage = message;
+    if (this.tooltip && this.tooltip._isTooltipVisible()) {
+      this.tooltip.hide(0);
+      setTimeout(() => this.tooltip.show(), 0);
+    } else {
+      this.tooltip.show();
     }
   }
 }
