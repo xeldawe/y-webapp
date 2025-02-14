@@ -10,8 +10,10 @@
             formControlName="firstCtrl"
             placeholder="Select Pet ID"
             required
-          >
-            <mat-option *ngFor="let pet of pets" [value]="pet.id">{{ pet.name }}</mat-option>
+            >
+            @for (pet of pets; track pet) {
+              <mat-option [value]="pet.id">{{ pet.name }}</mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <div>
@@ -28,51 +30,59 @@
             matInput
             placeholder="YYYY-MM-DD"
             formControlName="secondCtrl"
-          />
-          <mat-error *ngIf="secondFormGroup.get('secondCtrl')?.hasError('required')">Ship date is required.</mat-error>
-        </mat-form-field>
+            />
+            @if (secondFormGroup.get('secondCtrl')?.hasError('required')) {
+              <mat-error>Ship date is required.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Quantity</mat-label>
-          <input
-            matInput
-            placeholder="Quantity"
-            formControlName="quantityCtrl"
-            type="number"
-          />
-          <mat-error *ngIf="secondFormGroup.get('quantityCtrl')?.hasError('min')">Quantity must be at least 1.</mat-error>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input
+              matInput
+              placeholder="Quantity"
+              formControlName="quantityCtrl"
+              type="number"
+              />
+              @if (secondFormGroup.get('quantityCtrl')?.hasError('min')) {
+                <mat-error>Quantity must be at least 1.</mat-error>
+              }
+            </mat-form-field>
 
-        <mat-form-field *ngIf="isUpdate">
-          <mat-label>Order Status</mat-label>
-          <mat-select
-            formControlName="orderStatusCtrl"
-            placeholder="Select Order Status"
-          >
-            <mat-option value="PLACED">PLACED</mat-option>
-            <mat-option value="APPROVED">APPROVED</mat-option>
-            <mat-option value="DELIVERED">DELIVERED</mat-option>
-          </mat-select>
-        </mat-form-field>
+            @if (isUpdate) {
+              <mat-form-field>
+                <mat-label>Order Status</mat-label>
+                <mat-select
+                  formControlName="orderStatusCtrl"
+                  placeholder="Select Order Status"
+                  >
+                  <mat-option value="PLACED">PLACED</mat-option>
+                  <mat-option value="APPROVED">APPROVED</mat-option>
+                  <mat-option value="DELIVERED">DELIVERED</mat-option>
+                </mat-select>
+              </mat-form-field>
+            }
 
-        <mat-checkbox *ngIf="isUpdate" formControlName="completeCtrl">Complete</mat-checkbox>
+            @if (isUpdate) {
+              <mat-checkbox formControlName="completeCtrl">Complete</mat-checkbox>
+            }
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="onSubmit()">{{ isUpdate ? 'Update' : 'Submit' }}</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-</mat-dialog-actions>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="onSubmit()">{{ isUpdate ? 'Update' : 'Submit' }}</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+    </mat-dialog-actions>

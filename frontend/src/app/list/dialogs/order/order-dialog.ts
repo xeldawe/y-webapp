@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
 import { OrderService } from '../../../api-client/api/order.service';
 import moment from 'moment';
 import { Store } from '@ngrx/store';
@@ -24,7 +24,6 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['order-dialog.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatStepperModule,
     FormsModule,
@@ -35,7 +34,7 @@ import { environment } from '../../../../environments/environment';
     MatCheckboxModule,
     MatDialogActions,
     MatDialogContent
-  ],
+],
 })
 export class OrderDialog implements OnInit {
   readonly dialogRef = inject(MatDialogRef<OrderDialog>);
