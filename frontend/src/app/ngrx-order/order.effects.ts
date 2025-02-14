@@ -33,7 +33,6 @@ export class OrderEffects {
       ofType(loadOrders),
       mergeMap((action) => {
         let url = `${this.apiUrl}/store/orders`;
-        console.log('From: ' + action.from);
         if (action.from && action.to) {
           return this.orderService.getOrders(action.from, action.to).pipe(
             map((orders: any) => loadOrdersSuccess({ orders })),
