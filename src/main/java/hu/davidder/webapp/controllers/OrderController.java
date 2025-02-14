@@ -78,8 +78,8 @@ public class OrderController {
         ZonedDateTime toDateTime = (to != null) ? parseZonedDateTime(to) : (filter != null ? filter.getTo() : null);
 
         if (fromDateTime != null && toDateTime != null) {
-            long intervalMonths = orderService.parseInterval();
-            if (Duration.between(fromDateTime, toDateTime).toDays() > intervalMonths * 30) {
+            long interval = orderService.parseInterval();
+            if (Duration.between(fromDateTime, toDateTime).toDays() > interval) {
                 return ResponseEntity.badRequest().build();
             }
         }

@@ -38,7 +38,7 @@ cd ..
 cd integration-developer-master
 
 echo "Building Music App application..."
-docker build --build-arg API_KEY=$API_KEY --build-arg FILTER_INTERVAL=$FILTER_INTERVAL --build-arg API_URL=$API_URL -t media-app:latest -f Dockerfile .
+docker build -t media-app:latest -f Dockerfile .
 echo "Build process completed."
 
 cd ..
