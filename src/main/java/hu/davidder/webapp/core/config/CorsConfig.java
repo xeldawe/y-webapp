@@ -1,5 +1,6 @@
 package hu.davidder.webapp.core.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CorsFilter;
@@ -9,6 +10,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class CorsConfig {
 
+	@Value("${API_URL:http://34.79.119.8}")
+	private String frontendUrl;
+	
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -16,7 +20,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedOrigin("http://localhost:4201");
         corsConfiguration.addAllowedOrigin("http://localhost:4200");
         corsConfiguration.addAllowedOrigin("http://localhost:4000");
-        corsConfiguration.addAllowedOrigin("http://34.79.119.8:4200");
+        corsConfiguration.addAllowedOrigin(frontendUrl+":4200");
         corsConfiguration.addAllowedMethod("GET");
         corsConfiguration.addAllowedMethod("POST");
         corsConfiguration.addAllowedMethod("PUT");

@@ -1,6 +1,6 @@
 @echo off
 REM Define variables
-set MYSQL_CONTAINER=webapp-mysql-1
+set MYSQL_CONTAINER=y-webapp-mysql-1
 set MYSQL_USER=test
 set MYSQL_PASSWORD=testpw
 
