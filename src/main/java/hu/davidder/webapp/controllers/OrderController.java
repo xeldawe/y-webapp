@@ -73,44 +73,9 @@ public class OrderController {
                     @ApiResponse(responseCode = "400", description = "Invalid date-time format", content = @Content(schema = @Schema(implementation = Void.class))) })
     public ResponseEntity<List<Order>> getOrders(@RequestParam(name = "from", required = false) String from,
             @RequestParam(name = "to", required = false) String to, @RequestBody(required = false) OrderFilter filter) {
-        ZonedDateTime fromDateTime = (from != null) ? parseZonedDateTime(from)
-                : (filter != null ? filter.getFrom() : null);
-        ZonedDateTime toDateTime = (to != null) ? parseZonedDateTime(to) : (filter != null ? filter.getTo() : null);
-
-        if (fromDateTime != null && toDateTime != null) {
-            long interval = orderService.parseInterval();
-            if (Duration.between(fromDateTime, toDateTime).toDays() > interval) {
-                return ResponseEntity.badRequest().build();
-            }
-        }
-
-        Iterable<Order> ordersIterable = orderService.getAllOrders();
-        List<Order> orders = StreamSupport.stream(ordersIterable.spliterator(), false)
-                .filter(order -> isWithinDateRange(order, fromDateTime, toDateTime)).collect(Collectors.toList());
-        return ResponseEntity.ok(orders);
+        return orderService.getAllOrders(from,to, filter);
     }
 
-	private boolean isWithinDateRange(Order order, ZonedDateTime from, ZonedDateTime to) {
-		if (from != null && order.getShipDate().isBefore(from)) {
-			return false;
-		}
-		if (to != null && order.getShipDate().isAfter(to)) {
-			return false;
-		}
-		return true;
-	}
-
-	private ZonedDateTime parseZonedDateTime(String dateTimeString) {
-		if (dateTimeString == null || dateTimeString.isEmpty()) {
-			return null;
-		}
-		try {
-			return ZonedDateTime.parse(dateTimeString, DateTimeFormatter.ISO_DATE_TIME)
-					.withZoneSameInstant(ZoneId.of("UTC"));
-		} catch (DateTimeParseException e) {
-			throw new IllegalArgumentException("Invalid date-time format: " + dateTimeString, e);
-		}
-	}
 
 	@GetMapping("/orders/{orderId}")
 	@Operation(summary = "Get an order by ID", security = { @SecurityRequirement(name = "x-api-key") }, responses = {
