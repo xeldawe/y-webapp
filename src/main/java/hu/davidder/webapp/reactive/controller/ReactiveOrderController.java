@@ -42,11 +42,10 @@ public class ReactiveOrderController extends AbstractVerticle {
     	EndpointBuilder endpointBuilder = new EndpointBuilder(vertx);
     	String base = "/store";
     	//Custom rate limit (better -> https://github.com/bucket4j/bucket4j - with redis combo)
-    	endpointBuilder.enableLocalRateLimit(1000,6000);
-    	endpointBuilder.enableApiKey(apiKey);
     	Route getOrdersRoute = endpointBuilder.addEndpoint(base+"/orders", HttpMethod.GET);
     	Route getOrderRoute = endpointBuilder.addEndpoint(base+"/orders/:orderId", HttpMethod.GET);
-  
+    	endpointBuilder.enableLocalRateLimit(1000,6000);
+    	endpointBuilder.enableApiKey(apiKey);
     	//create pets route
     	getOrders(getOrdersRoute);
     	getOrder(getOrderRoute);
