@@ -61,7 +61,7 @@ public class OrderControllerTest {
 
 	@MockitoBean
 	private RedisTemplate<String, Object> redisTemplate;
-	
+
 	@Value("${API_KEY:abc123}")
 	private String apiKey;
 

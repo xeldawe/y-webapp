@@ -1,2 +1,4 @@
 *.tar
 docker/*.tar
+bin/
+build/
