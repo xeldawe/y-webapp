@@ -150,7 +150,7 @@ services:
       KC_DB_URL: jdbc:postgresql://postgres:5432/petstore
       KC_DB_USERNAME: pet
       KC_DB_PASSWORD: meow
-      KC_HOSTNAME: keycloak
+      KC_HOSTNAME: localhost
       KC_HTTP_ENABLED: "true"
       KC_HOSTNAME_STRICT: "false"
       KC_HOSTNAME_STRICT_HTTPS: "false"
