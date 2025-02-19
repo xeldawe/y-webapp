@@ -15,6 +15,9 @@ export API_KEY=${API_KEY:-rsa123}
 echo "Running network.sh to create subnet..."
 source network.sh
 
+echo "Create keycloak_data..."
+docker volume create keycloak_data
+
 echo "Stopping running Docker Compose services..."
 docker-compose down
 

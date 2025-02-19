@@ -27,6 +27,12 @@ repositories {
 }
 
 dependencies {
+	implementation("org.apache.httpcomponents.client5:httpclient5:5.4.2")
+	implementation("org.springframework.security:spring-security-oauth2-resource-server:6.4.3")
+	implementation("org.springframework.security:spring-security-oauth2-jose:6.4.3")
+	implementation("org.springframework.security:spring-security-oauth2-client:6.4.3")
+	implementation("org.keycloak:keycloak-spring-boot-starter:25.0.3")
+	implementation("org.keycloak:keycloak-spring-security-adapter:25.0.3")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-autoconfigure:3.4.2")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4")

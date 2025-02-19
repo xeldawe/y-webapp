@@ -6,6 +6,9 @@ call init-api-key.bat
 echo Running network.bat to create subnet...
 call network.bat
 
+echo Create keycloak_data...
+docker volume create keycloak_data
+
 echo Stopping running Docker Compose services...
 docker-compose down
 

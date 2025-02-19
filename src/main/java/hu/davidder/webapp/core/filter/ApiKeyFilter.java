@@ -2,6 +2,7 @@ package hu.davidder.webapp.core.filter;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -48,13 +49,16 @@ public class ApiKeyFilter extends GenericFilterBean {
 	public ApiKeyFilter(String apiKey) {
 		this.apiKey = apiKey;
 	}
+	
+	@Value("${keycloak.enabled:false}")
+	private boolean keycloakEnabled;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String requestApiKey = httpRequest.getHeader("X-API-KEY");
-		if (requestApiKey != null) {
+		if (requestApiKey != null && !keycloakEnabled) {
 			if (apiKey.equals(requestApiKey)) {
 				ApiKeyAuthenticationToken authentication = new ApiKeyAuthenticationToken("apiKeyUser", null);
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));

@@ -1,0 +1,11 @@
+{
+  "realm": "testrealm",
+  "auth-server-url": "http://keycloak:8080",
+  "ssl-required": "none",
+  "resource": "testclient",
+  "credentials": {
+    "secret": "n255vtdaUfWwNPoW79iBraKb0v2sGWh0"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}

@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "5931b959-c43d-4e83-9e50-c4794936804b",
+		"name": "y-webapp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4484835"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8082/realms/testrealm/protocol/openid-connect/token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "testclient",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "n255vtdaUfWwNPoW79iBraKb0v2sGWh0",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "xeldawe@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testpw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/realms/testrealm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"realms",
+						"testrealm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
