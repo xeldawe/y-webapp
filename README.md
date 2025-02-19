@@ -18,14 +18,6 @@ If you need to update, follow the instructions on the official Docker documentat
     run-app.bat
 You will be prompted to enter an API key. For example, you can use 768Bu2k1 or any other key. This will create and start the Docker Compose setup.
 
-## 3. Initialize Pets
-- Run the init_pets.bat script to populate the database with dummy pet data:
-  ```sh
-  init_pets.bat
-## 4. Fix Integration Project Database
-- Run the fix.bat script to fix the integration project database:
-  ```sh
-  fix.bat
 ## 5. Enjoy
 Your application should now be up and running. Here are the accessible endpoints and ports:
 
@@ -44,5 +36,8 @@ Your application should now be up and running. Here are the accessible endpoints
 - Java Async Servlet: Available on port 8080
 - Java Async Servlet Swagger UI: Available at 8080/swagger-ui/index.html
 #     
-- Vert.x Store Endpoints: Available on port 8091.
-- Vert.x Pet Endpoints: Available on port 8092.
+- Vert.x Store Endpoints: Available on port 8091
+- Vert.x Pet Endpoints: Available on port 8092
+#     
+- Keycloak: Available on port 8092
+- Keycloak (Management Interface): Available on port 9000.
