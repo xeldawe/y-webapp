@@ -64,8 +64,13 @@ set payload=!payload!]
 :: Close JSON array
 set payload=!payload!]
 
+:retry
 :: Call the API
-curl -X POST "%API_URL%:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!"
+curl -X POST "%API_URL%:8080/pet/bulk" -H "Content-Type: application/json" -d "!payload!" --fail --silent --show-error
+if %errorlevel% neq 0 (
+    echo "API call failed, retrying..."
+    timeout /T 10
+    goto retry
+)
 
-endlocal
-cmd /k
+echo "Pets initialized successfully."

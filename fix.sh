@@ -6,29 +6,47 @@ MYSQL_USER="test"
 MYSQL_PASSWORD="testpw"
 SQL_COMMANDS_FILE="integration-developer-master/db/init.sql"
 
-# Drop the existing music database
-echo "Dropping the existing music database..."
-docker exec -i "$MYSQL_CONTAINER" mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "DROP DATABASE IF EXISTS music;"
-if [ $? -ne 0 ]; then
-    echo "Failed to drop database. Aborting script."
-    exit 1
-fi
+# Function to execute a MySQL command
+execute_mysql_command() {
+    docker exec -i "$MYSQL_CONTAINER" mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "$1"
+    return $?
+}
 
-# Recreate the music database
-echo "Recreating the music database..."
-docker exec -i "$MYSQL_CONTAINER" mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "CREATE DATABASE music;"
-if [ $? -ne 0 ]; then
-    echo "Failed to create database. Aborting script."
-    exit 1
-fi
+# Function to run SQL file
+run_sql_file() {
+    docker exec -i "$MYSQL_CONTAINER" mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" music < "$SQL_COMMANDS_FILE"
+    return $?
+}
 
-# Run the SQL commands from the file
-echo "Running init.sql to set up the schema and seed the database..."
-docker exec -i "$MYSQL_CONTAINER" mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" music < "$SQL_COMMANDS_FILE"
-if [ $? -ne 0 ]; then
-    echo "Failed to run init.sql. Aborting script."
-    exit 1
-fi
+# Retry logic
+while true; do
+    # Drop the existing music database
+    echo "Dropping the existing music database..."
+    execute_mysql_command "DROP DATABASE IF EXISTS music;"
+    if [ $? -ne 0 ]; then
+        echo "Failed to drop database. Retrying..."
+        sleep 10
+        continue
+    fi
 
-echo "Done!"
+    # Recreate the music database
+    echo "Recreating the music database..."
+    execute_mysql_command "CREATE DATABASE music;"
+    if [ $? -ne 0 ]; then
+        echo "Failed to create database. Retrying..."
+        sleep 10
+        continue
+    fi
 
+    # Run the SQL commands from the file
+    echo "Running init.sql to set up the schema and seed the database..."
+    run_sql_file
+    if [ $? -ne 0 ]; then
+        echo "Failed to run init.sql. Retrying..."
+        sleep 10
+        continue
+    fi
+
+    echo "Database setup completed successfully."
+    break
+done

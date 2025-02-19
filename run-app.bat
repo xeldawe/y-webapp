@@ -33,8 +33,53 @@ docker build --build-arg -t media-app:latest -f Dockerfile .
 echo Build process completed.
 
 cd ..
+cd keycloak
+
+echo Building Keycloak application...
+docker build -t mykeycloak:latest -f Dockerfile .
+
+cd ..
 
 echo Starting Docker Compose...
-docker-compose --env-file merged.env up --build
+start "docker-compose" docker-compose --env-file merged.env up --build
 
-pause
+echo Waiting for Docker Compose to start services...
+
+set backend_script_run=0
+set music_app_script_run=0
+
+:check_services
+timeout /T 10
+
+for /f "tokens=*" %%i in ('docker-compose ps -q backend') do (
+    set backend_status=%%i
+)
+for /f "tokens=*" %%i in ('docker-compose ps -q music-app') do (
+    set music_app_status=%%i
+)
+
+if not "%backend_status%"=="" (
+    echo Backend service is up and running.
+    if %backend_script_run%==0 (
+        echo Running init_pets.bat script...
+        call init_pets.bat
+        set backend_script_run=1
+    )
+)
+
+if not "%music_app_status%"=="" (
+    echo Music App service is up and running.
+    if %music_app_script_run%==0 (
+        echo Running fix.bat script...
+        call fix.bat
+        set music_app_script_run=1
+    )
+)
+
+if %backend_script_run%==1 if %music_app_script_run%==1 (
+    echo All tasks completed. Exiting...
+    pause
+)
+
+echo Waiting for services to be healthy...
+goto check_services
