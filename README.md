@@ -18,7 +18,7 @@ If you need to update, follow the instructions on the official Docker documentat
     run-app.bat
 You will be prompted to enter an API key. For example, you can use 768Bu2k1 or any other key. This will create and start the Docker Compose setup.
 
-## 5. Enjoy
+## 3. Enjoy
 Your application should now be up and running. Here are the accessible endpoints and ports:
 
 ### Services and Endpoints
@@ -38,6 +38,7 @@ Your application should now be up and running. Here are the accessible endpoints
 #     
 - Vert.x Store Endpoints: Available on port 8091
 - Vert.x Pet Endpoints: Available on port 8092
-#     
+# 
+Enable keycloak auth -> application.properties -> keycloak.enabled=true (default false)    
 - Keycloak: Available on port 8092
 - Keycloak (Management Interface): Available on port 9000.
