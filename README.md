@@ -13,7 +13,7 @@ If you need to update, follow the instructions on the official Docker documentat
 ## 2. Run the Application
 - Open a terminal or command prompt.
 - Navigate to the directory containing your project.
-- Run the run-app.bat script:
+- Run the run-app.bat script (open cmd):
   ```sh
     run-app.bat
 You will be prompted to enter an API key. For example, you can use 768Bu2k1 or any other key. This will create and start the Docker Compose setup.
