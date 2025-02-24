@@ -9,9 +9,9 @@ metadata:
   name: backend
 spec:
   ports:
-    - name: "8080"
-      port: 8080
-      targetPort: 8081
+    - name: "8081"
+      port: 8081
+      targetPort: 8082
     - name: "8091"
       port: 8091
       targetPort: 8988
