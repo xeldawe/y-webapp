@@ -30,7 +30,7 @@ public class AuthServer {
 
 	private OAuth2Options getCredentials() {
 		return new OAuth2Options().setClientId(config.getClientId()).setClientSecret(config.getClientSecret())
-				.setSite("http://keycloak:8080/realms/testrealm").setTenant("testrealm");
+				.setSite(config.getSite()).setTenant("testrealm");
 	}
 
 	public Future<OAuth2Auth> keycloak() {
