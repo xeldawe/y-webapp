@@ -51,7 +51,7 @@ spec:
           imagePullPolicy: Never
           name: backend
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
               protocol: TCP
             - containerPort: 8988
               protocol: TCP
