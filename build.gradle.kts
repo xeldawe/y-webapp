@@ -27,6 +27,9 @@ repositories {
 }
 
 dependencies {
+	implementation("com.auth0:java-jwt:4.5.0")
+    implementation("io.vertx:vertx-core")
+    implementation("io.vertx:vertx-auth-oauth2")
 	implementation("org.apache.httpcomponents.client5:httpclient5:5.4.2")
 	implementation("org.springframework.security:spring-security-oauth2-resource-server:6.4.3")
 	implementation("org.springframework.security:spring-security-oauth2-jose:6.4.3")

@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  API_URL: http://localhost
+  FILTER_INTERVAL: 1m
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: backend-global-env
+  name: global-env

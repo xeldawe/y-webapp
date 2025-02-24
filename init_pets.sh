@@ -42,5 +42,5 @@ done
 payload="$payload]"
 
 # Call the API
-curl -X POST "${API_URL}:8080/pet/bulk" -H "Content-Type: application/json" -d "$payload"
+curl -X POST "${API_URL}:8081/pet/bulk" -H "Content-Type: application/json" -d "$payload"
 

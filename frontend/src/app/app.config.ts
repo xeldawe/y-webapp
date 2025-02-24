@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
 
 const apiConfigFactory = (): Configuration => {
   const params: ConfigurationParameters = {
-    basePath: environment.apiUrl + ':8080',
+    basePath: environment.apiUrl + ':8081',
   };
   return new Configuration(params);
 };

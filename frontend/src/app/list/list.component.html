@@ -74,8 +74,14 @@
           <p>Ship Date: {{ o.shipDate }}</p>
           <p>Pet: {{ o.petId }} ({{ getPetName(o.petId!) }})</p>
           <p>Complete: {{ o.complete }}</p>
-          <mat-icon (click)="delete(o)">delete</mat-icon>
-          <mat-icon (click)="editOrderDialog(o, '0ms', '0ms')">edit</mat-icon>
+          <div class="actions">
+          <button mat-mini-fab class="edit" (click)="editOrderDialog(o, '0ms', '0ms')">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab class="delete" (click)="delete(o)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
         </mat-expansion-panel>
         }
       </mat-accordion>

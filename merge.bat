@@ -1,14 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Check if global.env and API_KEY.env have content
+:: Check if global.env and api-key.env have content
 if not exist global.env (
     echo global.env is empty or does not exist.
     exit /b 1
 )
 
-if not exist API_KEY.env (
-    echo API_KEY.env is empty or does not exist.
+if not exist api-key.env (
+    echo api-key.env is empty or does not exist.
     exit /b 1
 )
 
@@ -16,15 +16,15 @@ if not exist API_KEY.env (
 echo Content of global.env:
 type global.env
 
-:: Display the content of API_KEY.env
-echo Content of API_KEY.env:
-type API_KEY.env
+:: Display the content of api-key.env
+echo Content of api-key.env:
+type api-key.env
 
 :: Merge the environment files into a single file
 (
     type global.env
     echo.
-    type API_KEY.env
+    type api-key.env
 ) > merged.env
 
 :: Check if merged.env was created successfully and has content

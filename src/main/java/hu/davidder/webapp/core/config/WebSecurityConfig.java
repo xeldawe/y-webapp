@@ -53,7 +53,7 @@ public class WebSecurityConfig {
 	@Value("${API_KEY:abc123}")
 	private String apiKey;
 
-	@Value("${keycloak.enabled:false}")
+	@Value("${KEYCLOAK_ENABLED:false}")
 	private boolean keycloakEnabled;
 
 	@Value("${security.oauth2.resourceserver.jwt.jwk-set-uri}")

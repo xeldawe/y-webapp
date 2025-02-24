@@ -2,6 +2,7 @@ package hu.davidder.webapp.reactive.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import hu.davidder.webapp.core.base.order.service.OrderService;
 import hu.davidder.webapp.reactive.util.EndpointBuilder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Route;
 
@@ -27,9 +29,12 @@ public class ReactiveOrderController extends AbstractVerticle {
     @Lazy
 	@Autowired
 	private OrderService orderService;
+    
+    @Autowired
+    private EndpointBuilder endpointBuilder;
 	
     private ObjectMapper objectMapper;
-	
+    
     public ReactiveOrderController() {
     	this.objectMapper = new ObjectMapper();
         this.objectMapper.registerModule(new JavaTimeModule());
@@ -39,11 +44,11 @@ public class ReactiveOrderController extends AbstractVerticle {
 
 	@Override
     public void start(Promise<Void> startPromise) {
-    	EndpointBuilder endpointBuilder = new EndpointBuilder(vertx);
     	String base = "/store";
     	//Custom rate limit (better -> https://github.com/bucket4j/bucket4j - with redis combo)
     	Route getOrdersRoute = endpointBuilder.addEndpoint(base+"/orders", HttpMethod.GET);
     	Route getOrderRoute = endpointBuilder.addEndpoint(base+"/orders/:orderId", HttpMethod.GET);
+    	endpointBuilder.enableOauth();
     	endpointBuilder.enableLocalRateLimit(1000,6000);
     	endpointBuilder.enableApiKey(apiKey);
     	//create pets route

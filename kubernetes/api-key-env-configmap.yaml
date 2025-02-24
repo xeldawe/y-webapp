@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  API_KEY: rf23
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: backend-api-key-env
+  name: api-key-env

@@ -22,7 +22,7 @@ echo "Stopping running Docker Compose services..."
 docker-compose down
 
 echo "Building Java Spring Boot application..."
-docker build --build-arg API_KEY=$API_KEY --build-arg FILTER_INTERVAL=$FILTER_INTERVAL --build-arg API_URL=$API_URL -t backend:latest -f Dockerfile .
+docker build -t backend:latest -f Dockerfile .
 
 cd frontend
 
@@ -35,7 +35,7 @@ node set-env.js
 
 echo "Building Angular frontend application..."
 # Pass the environment variables during the build
-docker build --build-arg API_KEY=$API_KEY --build-arg FILTER_INTERVAL=$FILTER_INTERVAL --build-arg API_URL=$API_URL -t frontend:latest -f Dockerfile .
+docker build -t frontend:latest -f Dockerfile .
 
 cd ..
 cd integration-developer-master

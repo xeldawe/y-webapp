@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8082/realms/testrealm/protocol/openid-connect/token",
+			"name": "Keycloak - token",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -24,7 +24,7 @@
 						},
 						{
 							"key": "client_secret",
-							"value": "n255vtdaUfWwNPoW79iBraKb0v2sGWh0",
+							"value": "onof0DqZ3YESYJInxjbyAmSsxUMrJNvf",
 							"type": "text"
 						},
 						{
@@ -41,6 +41,12 @@
 							"key": "password",
 							"value": "testpw",
 							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -57,6 +63,671 @@
 						"protocol",
 						"openid-connect",
 						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Keycloak - revoke",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "testclient",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "onof0DqZ3YESYJInxjbyAmSsxUMrJNvf",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "xeldawe@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testpw",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MDYzNjgsImlhdCI6MTc0MDQwNjA2OCwianRpIjoiYmVmYjM4ODMtYjU2My00ZDNmLTg3MjMtOWNlNGNlMmZkNDUxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgyL3JlYWxtcy90ZXN0cmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmZmMmQ3MzctYTMzZS00ODk4LWExNGEtZGQwMDk2NzM2MzU4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidGVzdGNsaWVudCIsInNpZCI6IjAyOWM0OWUxLTQxN2ItNGI3OS05ZDYzLTE2YTA0YmEzM2M3YSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtdGVzdHJlYWxtIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ0ZXN0IHRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ4ZWxkYXdlIiwiZ2l2ZW5fbmFtZSI6InRlc3QiLCJmYW1pbHlfbmFtZSI6InRlc3QiLCJlbWFpbCI6InhlbGRhd2VAZ21haWwuY29tIn0.iZWXqUAcJAwfSFmPOgWGcFWvcRlvF_BvObV9OMfPK5zdNHJq96J4P1czCVUOgcfkwemuEHf1F6u7wpeuNl58l0XzMiFF2IV337OD1hUWGcA7OFlbE8q6JA_YWlL3ZBfJrEMw02Bho4oTNGmA736E1eOvwVmFyZ1MNS2CR4VCpeFyYx5Xp6YJj0Eo7LpWjuFzC_8KgD-pm1pTw0G35P6QlmxKqSamd8gi6JaGx6e_MlO7c0LC-yELgSM12zNfKaY6cjGdZh39bycxl6s9TlVUY-KS14kTZth5PrUOw8XiRh8upSJoIC_CNUbR9Yh0Rzh9qXgt_-HKZuguofFQzzPZOA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/realms/testrealm/protocol/openid-connect/revoke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"realms",
+						"testrealm",
+						"protocol",
+						"openid-connect",
+						"revoke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vert.x - Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8091/store/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"store",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Artists",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8100/artists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - DELETE",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/store/orders/22",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store",
+						"orders",
+						"22"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vert.x - Pets",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "nsa1234",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8092/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - bulk pet upload",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n  \"name\": \"Buddy\",\r\n  \"photoUrls\": [\"http://example.com/photo1.jpg\", \"http://example.com/photo2.jpg\"],\r\n    \"tags\": [\r\n        {\r\n            \"tag\": {\"name\":\"tag1\"}\r\n        },\r\n        {\r\n            \"tag\": {\"name\":\"tag2\"}\r\n        }\r\n    ],\r\n  \"petStatus\": \"AVAILABLE\",\r\n  \"categories\": [\r\n      {\r\n            \"category\": {\"name\":\"category1\"}\r\n        },\r\n        {\r\n            \"category\": {\"name\":\"category2\"}\r\n        }\r\n  ]\r\n},\r\n  {\r\n  \"name\": \"Buddy\",\r\n  \"photoUrls\": [\"http://example.com/photo1.jpg\", \"http://example.com/photo2.jpg\"],\r\n    \"tags\": [\r\n        {\r\n            \"tag\": {\"name\":\"tag1\"}\r\n        },\r\n        {\r\n            \"tag\": {\"name\":\"tag2\"}\r\n        }\r\n    ],\r\n  \"petStatus\": \"AVAILABLE\",\r\n  \"categories\": [\r\n      {\r\n            \"category\": {\"name\":\"category1\"}\r\n        },\r\n        {\r\n            \"category\": {\"name\":\"category2\"}\r\n        }\r\n  ]\r\n}\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/pet/bulk",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"pet",
+						"bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - patch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "dfsadas34534fh3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\"op\":\"replace\",\"path\":\"/quantity\",\"value\":2},{\"op\":\"replace\",\"path\":\"/shipDate\",\"value\":\"2025-02-13T23:00:00Z\"},{\"op\":\"replace\",\"path\":\"/orderStatus\",\"value\":\"APPROVED\"},{\"op\":\"replace\",\"path\":\"/complete\",\"value\":true}]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/store/orders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nginx - Artists",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8100/artists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Native - Artists",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8180/artists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8180",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8091/store/orders/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"store",
+						"orders",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8091/store/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"store",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genres",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8180/genres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8180",
+					"path": [
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - artistId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8180/albums?artistId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8180",
+					"path": [
+						"albums"
+					],
+					"query": [
+						{
+							"key": "artistId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - artistName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwS3FXN2VYaTdMZVl4d3ozWjBmVzVxakE1amkwYTNrYmt3OXo4Nm9LLVhVIn0.eyJleHAiOjE3NDA0MTQyMDQsImlhdCI6MTc0MDQxMzkwNCwianRpIjoiMDE4YTYwMGQtNTAxMS00YzZjLWE1NWItNTQ1YTI3NGQxNmRiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiZmYyZDczNy1hMzNlLTQ4OTgtYTE0YS1kZDAwOTY3MzYzNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiZjU3NDcwNzMtZWEwNS00YTdlLWE2ZTQtOGI0MTc5ODU5NDE5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InhlbGRhd2UiLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidGVzdCIsImVtYWlsIjoieGVsZGF3ZUBnbWFpbC5jb20ifQ.S_KUz-2ifYyOSzUpjjI4Qz_pXDBVzib5knX-k8yAtxu5vVLCnadlXV4CrS6YkhpsJchYYLUXFjPraWPU96KdizfxVGUiA_qFT_LKMJgvEUwMc6ja5HY1j0LNBU1UVhn-AWw-RLQEvCsuvJ-GfBJUImZ8WMoSp_k2miFepIDzzkWgi49f75AG04qcMvZIEM2D79TzWCB9qsr7axX0FPjMYgC8DNBKaJ_8wm7G3KHynDeRUcj3vqbZ1w9AjDi4xFAoe3tbRpTFQvPEPdVEdtMZDyKHpTBUxE-cp4ma3lIom1_sW3t_ZKvnPB4G9JaJrlGk316JI5-qR7kSmYADG1Om8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "asdasdas",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8180/albums?artistName=David Bowie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8180",
+					"path": [
+						"albums"
+					],
+					"query": [
+						{
+							"key": "artistName",
+							"value": "David Bowie"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - order valid filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "hjgyjyu4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"hello\",\r\n    \"headers\": [[\"key1\", \"value1\"], [\"key2\", \"value5\"]]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/store/orders?from=2025-02-11T23%3A00%3A00Z&to=2025-02-20T22%3A59%3A59Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"store",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2025-02-11T23%3A00%3A00Z"
+						},
+						{
+							"key": "to",
+							"value": "2025-02-20T22%3A59%3A59Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - order invalid filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "hjgyjyu4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"hello\",\r\n    \"headers\": [[\"key1\", \"value1\"], [\"key2\", \"value5\"]]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/store/orders?from=2025-02-11T23%3A00%3A00Z&to=2026-02-20T22%3A59%3A59Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"store",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2025-02-11T23%3A00%3A00Z"
+						},
+						{
+							"key": "to",
+							"value": "2026-02-20T22%3A59%3A59Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring - create order (with invalid petId)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJMZDNvTnMtQ1RSSXFYajZyV2JmRDVSb0F4SUt1QlRucUZwd1NsclNDMGl3In0.eyJleHAiOjE3Mzk5ODAwNDEsImlhdCI6MTczOTk3OTc0MSwianRpIjoiNmI1MDIwYTEtZDgzZS00YTYxLWI2YWEtOTVkODhiZjM2YmFiIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODIvcmVhbG1zL3Rlc3RyZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5MDFkMTI0My1lOTAxLTQxZjYtYWFlZC0xODFiMTVlMmY1M2YiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ0ZXN0Y2xpZW50Iiwic2lkIjoiYWJiNGNkOWEtMmY2MC00NzVkLTliMzktNWMxZjY2MjA3ZmMyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10ZXN0cmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3RlciBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoieGVsZGF3ZUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiVGVzdGVyIiwiZmFtaWx5X25hbWUiOiJUZXN0IiwiZW1haWwiOiJ4ZWxkYXdlQGdtYWlsLmNvbSJ9.fVYvqSPHCVcFmR8JmTTUqkLRHpMZhP4VA7tO-lqGXWu2Wy7y58IR0hkDF6DHMYIl5VHRkLeCpC9jryZxDEKRf3ZQSbPz-65xj-tlrOKP_zQXvSbk3lgBa5pIpZv7k8rMHYpqlgvywQPTrOP1bNqUloW2Hm99mfVQ4sAVUxy7MXBJZYSGu8INe09Y8Pq7i8rn4DSFYlKXpdwnR3KJ_-nZGmmpTQDeLWeSm2mazIwllkkvuHCSVByGawLVs9TF6B6anblvzsdNRyKcaRPlDvEKBWKJB7YsRv8jGxYWVjclgRQ4qFC6RTJKKvXeKkEbrPQWWRfYTOdTwyXwwdMFbaEpDw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "hjgyjyu4",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":null,\"petId\":99999,\"quantity\":2,\"shipDate\":\"2025-02-15T16:14:10.3251275Z\",\"orderStatus\":\"PLACED\",\"complete\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/store/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"store",
+						"order"
 					]
 				}
 			},

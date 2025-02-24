@@ -13,10 +13,19 @@
     margin-bottom: 16px;
   }
 
-  .root{
-    display: ruby;
-  }
-
   .list{
     margin-top: 20px;
+  }
+
+  .mat-mdc-mini-fab.mat-accent {
+    --mdc-fab-small-container-color: #b4ff00;
+    --mat-fab-small-foreground-color: #002340;
+  }
+
+  .delete{
+    margin-left: 10px;
+  }
+
+  .actions{
+    text-align: right;
   }
