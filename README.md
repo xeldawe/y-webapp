@@ -33,12 +33,12 @@ Your application should now be up and running. Here are the accessible endpoints
 - MySQL Database: Accessible on port 3306
 - Redis: Available on port 6379
 #
-- Java Async Servlet: Available on port 8080
+- Java Async Servlet: Available on port 8081
 - Java Async Servlet Swagger UI: Available at 8080/swagger-ui/index.html
 #     
 - Vert.x Store Endpoints: Available on port 8091
 - Vert.x Pet Endpoints: Available on port 8092
 # 
-Enable keycloak auth -> application.properties -> keycloak.enabled=true (default false)    
-- Keycloak: Available on port 8092
+Enable keycloak auth -> global.env (KEYCLOAK_ENABLED=true)
+- Keycloak: Available on port 8080
 - Keycloak (Management Interface): Available on port 9000.
