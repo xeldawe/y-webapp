@@ -34,7 +34,7 @@ Your application should now be up and running. Here are the accessible endpoints
 - Redis: Available on port 6379
 #
 - Java Async Servlet: Available on port 8081
-- Java Async Servlet Swagger UI: Available at 8080/swagger-ui/index.html
+- Java Async Servlet Swagger UI: Available at 8081/swagger-ui/index.html
 #     
 - Vert.x Store Endpoints: Available on port 8091
 - Vert.x Pet Endpoints: Available on port 8092
