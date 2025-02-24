@@ -3,7 +3,6 @@ package hu.davidder.webapp.reactive.auth;
 import io.vertx.core.MultiMap;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.codec.BodyCodec;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.davidder.webapp.reactive.util.CustomKeycloakConfig;
@@ -14,7 +13,6 @@ public class KeycloakService {
     private final WebClient webClient;
     private final CustomKeycloakConfig config;
 
-    @Autowired
     public KeycloakService(WebClient webClient, CustomKeycloakConfig config) {
         this.webClient = webClient;
         this.config = config;
