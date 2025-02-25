@@ -76,7 +76,7 @@ public class CacheConfig {
 								.serializeValuesWith(RedisSerializationContext.SerializationPair
 										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, Order.class))))
 				.withCacheConfiguration("pets",
-						RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMillis(orderCacheDuration))
+						RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMillis(petsCacheDuration))
 								.serializeValuesWith(RedisSerializationContext.SerializationPair
 										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, petType))));
 	}
