@@ -14,10 +14,10 @@ COPY settings.gradle.kts .
 COPY src ./src
 
 # Ensure the gradlew file has executable permissions for Unix systems
-RUN chmod +x gradlew
+RUN chmod +x gradle
 
 # Build the application
-RUN ./gradlew build
+RUN gradle build
 
 # Stage 2: Create the runtime image
 FROM openjdk:23
