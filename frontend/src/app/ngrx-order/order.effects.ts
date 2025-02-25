@@ -87,6 +87,11 @@ export class OrderEffects {
                 updateOrderFailure({ error: 'Current order not found' })
               );
             }
+            if(action.localOnly){
+              return of(
+                updateOrderSuccess({ order:action.order })
+              );
+            }
             const patchOperations = createPatchOperations(
               currentOrder,
               action.order
@@ -97,6 +102,7 @@ export class OrderEffects {
                 map((order) => updateOrderSuccess({ order })),
                 catchError((error) => of(updateOrderFailure({ error })))
               );
+              
           })
         );
       })

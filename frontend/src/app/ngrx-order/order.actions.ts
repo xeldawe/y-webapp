@@ -1,6 +1,21 @@
 import { createAction, props } from '@ngrx/store';
 import { Order } from '../api-client';
 
+export const loadOrder = createAction(
+  '[Order] Load Order',
+  props<{ id: number }>()
+);
+
+export const loadOrderSuccess = createAction(
+  '[Order] Load Orders Success',
+  props<{ order: Order }>()
+);
+
+export const loadOrderFailure = createAction(
+  '[Order] Load Order Failure',
+  props<{ error: any }>()
+);
+
 export const loadOrders = createAction(
   '[Order] Load Orders',
   props<{ from?: string; to?: string }>()
@@ -48,7 +63,7 @@ export const addOrderFailure = createAction(
 
 export const triggerUpdateOrder = createAction(
   '[Order] Trigger Update Order',
-  props<{ order: Order }>()
+  props<{ order: Order, localOnly:boolean }>()
 );
 
 export const updateOrderSuccess = createAction(

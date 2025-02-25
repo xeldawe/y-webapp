@@ -159,7 +159,7 @@ export class ListComponent implements OnInit {
           .subscribe(
             (updatedOrder) => {
               this.expanded = order.id!;
-              this.store.dispatch(triggerUpdateOrder({ order: updatedOrder }));
+              this.store.dispatch(triggerUpdateOrder({ order: updatedOrder, localOnly:true }));
               this.showTooltip(updatedOrder.shipDate!);
               return;
             },

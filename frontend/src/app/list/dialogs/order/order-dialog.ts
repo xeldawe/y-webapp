@@ -117,7 +117,7 @@ export class OrderDialog implements OnInit {
     };
 
     if (this.isUpdate) {
-      this.store.dispatch(triggerUpdateOrder({ order }));
+      this.store.dispatch(triggerUpdateOrder({ order, localOnly:false }));
     } else {
       this.store.dispatch(addOrder({ order }));
     }
