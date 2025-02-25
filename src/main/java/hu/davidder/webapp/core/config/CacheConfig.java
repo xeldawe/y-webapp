@@ -23,6 +23,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import hu.davidder.webapp.core.base.order.entity.Order;
+import hu.davidder.webapp.core.base.pet.entity.Pet;
 import hu.davidder.webapp.core.util.RedisUtil;
 import jakarta.annotation.PostConstruct;
 
@@ -37,6 +38,9 @@ public class CacheConfig {
 	@Value("${order.cache.duration}")
 	private long orderCacheDuration;
 
+	@Value("${pets.cache.duration}")
+	private long petsCacheDuration;
+	
 	@Autowired
 	private RedisUtil redisUtil;
 	
@@ -44,7 +48,7 @@ public class CacheConfig {
     private static final Logger logger = LoggerFactory.getLogger(CacheConfig.class);
     @PostConstruct
     public void logCacheConfig() {
-        logger.info("Cache Configurations initialized with petsCacheDuration={} and petCacheDuration={}", ordersCacheDuration, orderCacheDuration);
+        logger.info("Cache Configurations initialized with ordersCacheDuration={} and orderCacheDuration={}", ordersCacheDuration, orderCacheDuration);
     }
 
 	/**
@@ -60,17 +64,21 @@ public class CacheConfig {
 		mapper.registerModule(new JavaTimeModule());
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		mapper.registerModule(new Jdk8Module());
-		JavaType transactionsType = mapper.getTypeFactory().constructType(new TypeReference<Iterable<Order>>() {
-		});
+		JavaType orderType = mapper.getTypeFactory().constructType(new TypeReference<Iterable<Order>>() {});
+		JavaType petType = mapper.getTypeFactory().constructType(new TypeReference<Iterable<Pet>>() {});
 		return builder -> builder
 				.withCacheConfiguration("orders",
 						RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMillis(ordersCacheDuration))
 								.serializeValuesWith(RedisSerializationContext.SerializationPair
-										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, transactionsType))))
+										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, orderType))))
 				.withCacheConfiguration("order",
 						RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMillis(orderCacheDuration))
 								.serializeValuesWith(RedisSerializationContext.SerializationPair
-										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, Order.class))));
+										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, Order.class))))
+				.withCacheConfiguration("pets",
+						RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMillis(orderCacheDuration))
+								.serializeValuesWith(RedisSerializationContext.SerializationPair
+										.fromSerializer(new Jackson2JsonRedisSerializer(mapper, petType))));
 	}
 
 }
