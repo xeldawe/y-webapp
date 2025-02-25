@@ -20,28 +20,35 @@ for /f "tokens=1,2 delims==" %%i in (merged.env) do (
     set %%i=%%j
 )
 
-echo Building Java Spring Boot application...
-docker build --build-arg API_KEY=%API_KEY% --build-arg FILTER_INTERVAL=%FILTER_INTERVAL% --build-arg API_URL=%API_URL% -t backend:latest -f Dockerfile .
+::echo Building Java Spring Boot application...
+::docker build --build-arg API_KEY=%API_KEY% --build-arg FILTER_INTERVAL=%FILTER_INTERVAL% --build-arg API_URL=%API_URL% -t backend:latest -f Dockerfile .
 
-cd frontend
+::cd frontend
 
-echo Building Angular frontend application...
-docker build --build-arg API_KEY=%API_KEY% --build-arg FILTER_INTERVAL=%FILTER_INTERVAL% --build-arg API_URL=%API_URL% -t frontend:latest -f Dockerfile .
+::echo Building Angular frontend application...
+::docker build --build-arg API_KEY=%API_KEY% --build-arg FILTER_INTERVAL=%FILTER_INTERVAL% --build-arg API_URL=%API_URL% -t frontend:latest -f Dockerfile .
 
-cd ..
-cd integration-developer-master
+::cd ..
+::cd swagger-ui
 
-echo Building Music App application...
-docker build --build-arg -t media-app:latest -f Dockerfile .
-echo Build process completed.
+::echo Building Swagger-ui application...
+::docker build --build-arg -t swagger-ui:latest -f Dockerfile .
+::echo Build process completed.
 
-cd ..
-cd keycloak
+::cd ..
+::cd integration-developer-master
 
-echo Building Keycloak application...
-docker build -t mykeycloak:latest -f Dockerfile .
+::echo Building Music App application...
+::docker build --build-arg -t media-app:latest -f Dockerfile .
+::echo Build process completed.
 
-cd ..
+::cd ..
+::cd keycloak
+
+::echo Building Keycloak application...
+::docker build -t mykeycloak:latest -f Dockerfile .
+
+::cd ..
 
 echo Starting Docker Compose...
 start "docker-compose" docker-compose --env-file merged.env up --build

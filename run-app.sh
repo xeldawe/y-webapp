@@ -21,34 +21,34 @@ docker volume create keycloak_data
 echo "Stopping running Docker Compose services..."
 docker-compose down
 
-echo "Building Java Spring Boot application..."
-docker build -t backend:latest -f Dockerfile .
+#echo "Building Java Spring Boot application..."
+#docker build -t backend:latest -f Dockerfile .
 
 cd frontend
 
-echo "Running environment setup script..."
-# Ensure the environment variable is set
+#echo "Running environment setup script..."
+ Ensure the environment variable is set
 if [ -z "$API_KEY" ]; then
   export API_KEY="rsa123"
 fi
 node set-env.js
 
-echo "Building Angular frontend application..."
+#echo "Building Angular frontend application..."
 # Pass the environment variables during the build
-docker build -t frontend:latest -f Dockerfile .
+#docker build -t frontend:latest -f Dockerfile .
 
-cd ..
-cd integration-developer-master
+#cd ..
+#cd integration-developer-master
 
-echo "Building Music App application..."
-docker build -t media-app:latest -f Dockerfile .
-echo "Build process completed."
+#echo "Building Music App application..."
+#docker build -t media-app:latest -f Dockerfile .
+#echo "Build process completed."
 
-cd ..
-cd keycloak
+#cd ..
+#cd keycloak
 
-echo "Building Keycloak application..."
-docker build -t mykeycloak:latest -f Dockerfile .
+#echo "Building Keycloak application..."
+#docker build -t mykeycloak:latest -f Dockerfile .
 
 cd ..
 

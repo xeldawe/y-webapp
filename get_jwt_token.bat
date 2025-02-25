@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Keycloak server details
-set KEYCLOAK_URL=http://localhost:8082/realms/testrealm/protocol/openid-connect/token
+set KEYCLOAK_URL=http://localhost:8080/realms/testrealm/protocol/openid-connect/token
 set CLIENT_ID=testclient
 set CLIENT_SECRET=n255vtdaUfWwNPoW79iBraKb0v2sGWh0
 set USERNAME=xeldawe@gmail.com

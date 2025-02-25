@@ -4,7 +4,7 @@ info:
   description: API documentation for the Integration Developer application.
   version: 3.1.0
 servers:
-  - url: http://localhost:8180
+  - url: http://localhost:8190/music-app
 paths:
   /genres:
     get:
@@ -84,42 +84,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Album'
-  /album/{albumId}:
-    get:
-      summary: Get album details by album ID
-      parameters:
-        - name: albumId
-          in: path
-          description: ID of the album to retrieve
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Successfully retrieved album details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Album'
-  /artists-by-genre:
-    get:
-      summary: Get artists by genre name
-      parameters:
-        - name: genreName
-          in: query
-          description: Name of the genre to filter by
-          required: false
-          schema:
-            type: string
-      responses:
-        200:
-          description: Successfully retrieved artists based on query parameters
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Artist'
 
 components:
   schemas:
