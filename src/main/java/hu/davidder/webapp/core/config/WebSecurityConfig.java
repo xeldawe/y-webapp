@@ -123,7 +123,7 @@ public class WebSecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/store/**").authenticated()
 						.requestMatchers(HttpMethod.DELETE, "/store/**").authenticated()
 						.requestMatchers(HttpMethod.PATCH, "/store/**").authenticated().requestMatchers("/pet/**")
-						.permitAll().anyRequest().authenticated())
+						.permitAll().anyRequest().permitAll())
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 	}
 
